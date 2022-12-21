@@ -1,12 +1,10 @@
 package project.couriertests;
-
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import project.helpers.*;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
@@ -21,7 +19,6 @@ public class CourierLoginTest {
     private final String noPasswordCreds = "{\"login\": \"blabla\", \"password\": \"\" }";
     @Before
     public void setUp() {
-
         RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru/";
     }
     @Test
@@ -32,7 +29,6 @@ public class CourierLoginTest {
         Credentials creds = Credentials.from(courier);
         ValidatableResponse loginResponse = client.login(creds);
         courierId = check.loggedInSuccessfully(loginResponse);
-
         assert courierId != 0;
     }
     @Test
@@ -46,14 +42,11 @@ public class CourierLoginTest {
                 .then().log().all()
                 .statusCode(404)
                 .body("message", is("Учетная запись не найдена"))
-                .extract().path("message")
-                ;
-
+                .extract().path("message");
         assert message.contains("Учетная запись не найдена");
     }
     @Test
     public void loginFailsWithoutLogin() { //этот тест проверяет, без login нельзя залогиниться возвращается текст ошибки
-
         String message = given().log().all()
                 .header("Content-Type", "application/json")
                 .body(noLoginCreds)
@@ -62,14 +55,11 @@ public class CourierLoginTest {
                 .then().log().all()
                 .statusCode(400)
                 .body("message", is("Недостаточно данных для входа"))
-                .extract().path("message")
-                ;
-
+                .extract().path("message");
         assert message.contains("Недостаточно данных для входа");
 }
     @Test
     public void loginFailsWithoutPassword() { //этот тест проверяет, без password нельзя залогиниться возвращается текст ошибки
-
         String message = given().log().all()
                 .header("Content-Type", "application/json")
                 .body(noPasswordCreds)
@@ -78,9 +68,7 @@ public class CourierLoginTest {
                 .then().log().all()
                 .statusCode(400)
                 .body("message", is("Недостаточно данных для входа"))
-                .extract().path("message")
-                ;
-
+                .extract().path("message");
         assert message.contains("Недостаточно данных для входа");
     }
     @After
@@ -88,6 +76,4 @@ public class CourierLoginTest {
         if (courierId > 0){
             ValidatableResponse response = client.delete(courierId);
             check.deletedSuccesfully(response);
-        }}
-
-    }
+        }}}

@@ -9,7 +9,6 @@ import project.helpers.Courier;
 import project.helpers.CourierClient;
 import project.helpers.CourierGenerator;
 
-
 public class CourierCreationTest {
     private final String ROOT = "/api/v1/courier";
     private Courier courier;
@@ -19,11 +18,8 @@ public class CourierCreationTest {
     private int courierId;
     private String messageInBody;
 
-
-
     @Before
     public void setUp() {
-
         RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru/";
     }
 
@@ -33,7 +29,6 @@ public class CourierCreationTest {
         ValidatableResponse creationResponse = client.create(courier);
         messageInBody = check.createdSuccessfully(creationResponse);
         assert !messageInBody.contains("ok: true");
-
     }
 
     @Test
@@ -43,7 +38,6 @@ public class CourierCreationTest {
         ValidatableResponse loginResponse = client.create(courier);
        String message = check.creationFailed(loginResponse);
        assert !message.isBlank();
-
     }
     @Test
     public void creationFailsWithoutLogin() { //"Этот тест проверяет, что нельзя создать курьера, не указав логин
@@ -65,6 +59,4 @@ public class CourierCreationTest {
         if (courierId > 0){
         ValidatableResponse response = client.delete(courierId);
         check.deletedSuccesfully(response);
-    }}
-
-}
+    }}}

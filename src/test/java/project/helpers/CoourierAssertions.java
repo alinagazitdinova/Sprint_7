@@ -1,24 +1,18 @@
 package project.helpers;
-
 import io.restassured.response.ValidatableResponse;
-
 import static org.hamcrest.Matchers.*;
 
 public class CoourierAssertions {
     public String createdSuccessfully(ValidatableResponse response){
         return response.assertThat()
                 .statusCode(201)
-                .body("ok", is(true)).toString()
-
-
-        ;
+                .body("ok", is(true)).toString();
     }
     public int loggedInSuccessfully(ValidatableResponse response){
        return response.assertThat()
                 .statusCode(200)
                 .body("id", greaterThan(0))
-                .extract().path("id")
-        ;
+                .extract().path("id");
     }
 
     public void loggedInFailed(ValidatableResponse response) {
@@ -37,12 +31,8 @@ public class CoourierAssertions {
                 .body("message", is("Этот логин уже используется. Попробуйте другой."))
                 .extract().path("message");
     }
-
     public void deletedSuccesfully(ValidatableResponse response) {
          response.assertThat()
                 .statusCode(200)
-                .body("ok", is(true))
-         ;
-
-    }
-}
+                .body("ok", is(true));
+    }}
