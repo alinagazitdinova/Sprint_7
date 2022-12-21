@@ -1,4 +1,4 @@
-package sprint7.Helpers;
+package project.helpers;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;

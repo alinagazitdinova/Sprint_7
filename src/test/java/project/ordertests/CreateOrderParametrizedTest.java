@@ -1,11 +1,11 @@
-package sprint7.OrderCreation;
+package project.ordertests;
 
 import io.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import sprint7.Helpers.Order;
+import project.helpers.Order;
 
 import java.util.Arrays;
 import java.util.List;

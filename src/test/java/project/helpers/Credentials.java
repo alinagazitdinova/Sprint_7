@@ -1,17 +1,20 @@
-package sprint7.Helpers;
+package project.helpers;
 
-public class Courier {
+public class Credentials {
     private String login;
-
+    // ключ link стал полем типа String
     private String password;
-    private String firstName;
 
 
-    public Courier(String login, String password, String firstName) {
+    // конструктор со всеми параметрами
+    public Credentials(String login, String password) {
         this.login = login;
         this.password = password;
-        this.firstName = firstName;
     }
+    public static Credentials from(Courier courier){
+        return new Credentials(courier.getLogin(), courier.getPassword());
+    }
+
 
     public String getLogin() {
         return login;
@@ -21,9 +24,7 @@ public class Courier {
         return password;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+
 
     public void setLogin(String login) {
         this.login = login;
@@ -33,11 +34,9 @@ public class Courier {
         this.password = password;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+
 
     // конструктор без параметров
-    public Courier() {
+    public Credentials() {
     }
 }

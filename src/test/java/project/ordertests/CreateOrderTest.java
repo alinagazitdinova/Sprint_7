@@ -1,9 +1,9 @@
-package sprint7.OrderCreation;
+package project.ordertests;
 
 import io.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
-import sprint7.Helpers.OrderNoColor;
+import project.helpers.OrderNoColor;
 
 import static io.restassured.RestAssured.given;
 

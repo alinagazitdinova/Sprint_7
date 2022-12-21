@@ -1,8 +1,8 @@
-package sprint7.Helpers;
+package project.helpers;
 
 import java.util.List;
 
-public class OrderNoColor {
+public class Order {
     private String firstName;
 
     private String lastName;
@@ -13,12 +13,10 @@ public class OrderNoColor {
     private String rentTime;
     private String deliveryDate;
     private String comment;
-    private String color;
 
 
 
-
-    public OrderNoColor(String firstName, String lastName, String address, String metroStation, String phone, String rentTime, String deliveryDate, String comment, String color) {
+    public Order(String firstName, String lastName, String address, String metroStation, String phone, String rentTime, String deliveryDate, String comment, List<String> colors) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,7 +26,6 @@ public class OrderNoColor {
         this.rentTime = rentTime;
         this.deliveryDate = deliveryDate;
         this.comment = comment;
-        this.color = color;
 
 
 
@@ -98,15 +95,9 @@ public class OrderNoColor {
         this.comment = comment;
     }
 
-    public String getColor() {
-        return color;
-    }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
 
     // конструктор без параметров
-    public OrderNoColor() {
+    public Order() {
     }
 }

@@ -1,11 +1,11 @@
-package sprint7.CourierLogin;
+package project.couriertests;
 
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import sprint7.Helpers.*;
+import project.helpers.*;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;

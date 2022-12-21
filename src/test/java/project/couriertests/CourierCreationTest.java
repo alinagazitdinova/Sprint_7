@@ -1,15 +1,13 @@
-package sprint7.CourierCreation;
+package project.couriertests;
 import io.restassured.RestAssured;
-// импортируем Before
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
-// импортируем Test
 import org.junit.Test;
-import sprint7.Helpers.CoourierAssertions;
-import sprint7.Helpers.Courier;
-import sprint7.Helpers.CourierClient;
-import sprint7.Helpers.CourierGenerator;
+import project.helpers.CoourierAssertions;
+import project.helpers.Courier;
+import project.helpers.CourierClient;
+import project.helpers.CourierGenerator;
 
 
 public class CourierCreationTest {

@@ -1,4 +1,4 @@
-package sprint7.NumberOfOrders;
+package project.ordertests;
 
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;

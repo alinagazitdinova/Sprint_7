@@ -1,4 +1,4 @@
-package sprint7.Helpers;
+package project.helpers;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
