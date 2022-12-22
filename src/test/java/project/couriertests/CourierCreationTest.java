@@ -11,11 +11,11 @@ import project.helpers.CourierClient;
 import project.helpers.CourierGenerator;
 
 public class CourierCreationTest {
-    private final String ROOT = "/api/v1/courier";
-    private Courier courier;
     protected final CourierGenerator generator = new CourierGenerator();
+    private final String ROOT = "/api/v1/courier";
     private final CourierClient client = new CourierClient();
     private final CoourierAssertions check = new CoourierAssertions();
+    private Courier courier;
     private int courierId;
     private String messageInBody;
 

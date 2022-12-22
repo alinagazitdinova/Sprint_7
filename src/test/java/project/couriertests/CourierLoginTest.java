@@ -11,14 +11,14 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
 public class CourierLoginTest {
-    private Courier courier;
-    private final String ROOT = "/api/v1/courier";
     protected final CourierGenerator generator = new CourierGenerator();
+    private final String ROOT = "/api/v1/courier";
     private final CourierClient client = new CourierClient();
     private final CoourierAssertions check = new CoourierAssertions();
-    private int courierId;
     private final String noLoginCreds = "{\"login\": \"\", \"password\": \"12347\" }";
     private final String noPasswordCreds = "{\"login\": \"blabla\", \"password\": \"\" }";
+    private Courier courier;
+    private int courierId;
 
     @Before
     public void setUp() {

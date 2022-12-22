@@ -14,26 +14,26 @@ import static io.restassured.RestAssured.given;
 
 @RunWith(Parameterized.class)
 public class CreateOrderParametrizedTest {
-    public Order order;
     private final List<String> colors;
+    public Order order;
 
     public CreateOrderParametrizedTest(List<String> color) {
         this.colors = color;
     }
 
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru/";
-        order = new Order("alina", "Blinchik", "Lenina, 8", "6", "+7 800 355 35 35", "3", "2022-12-31", "the fastest, please", colors);
-    }
-
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестируемый цвет {0}")
     public static Object[][] getData() {
         return new Object[][]{
                 {Arrays.asList("BLACK", "GREY")},
                 {List.of("BLACK")},
                 {List.of("GREY")},
         };
+    }
+
+    @Before
+    public void setUp() {
+        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru/";
+        order = new Order("alina", "Blinchik", "Lenina, 8", "6", "+7 800 355 35 35", "3", "2022-12-31", "the fastest, please", colors);
     }
 
     @Test

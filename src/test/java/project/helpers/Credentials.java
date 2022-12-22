@@ -9,6 +9,10 @@ public class Credentials {
         this.password = password;
     }
 
+    // конструктор без параметров
+    public Credentials() {
+    }
+
     public static Credentials from(Courier courier) {
         return new Credentials(courier.getLogin(), courier.getPassword());
     }
@@ -17,19 +21,15 @@ public class Credentials {
         return login;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setLogin(String login) {
         this.login = login;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getPassword() {
+        return password;
     }
 
-    // конструктор без параметров
-    public Credentials() {
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
