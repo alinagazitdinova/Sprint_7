@@ -1,17 +1,22 @@
 package project.ordertests;
+
 import io.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
 import project.helpers.OrderNoColor;
+
 import static io.restassured.RestAssured.given;
+
 public class CreateOrderTest {
     public OrderNoColor orderNoColor;
     public String color = null;
+
     @Before
     public void setUp() {
         RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru/";
-        orderNoColor = new OrderNoColor("alina", "Blinchik", "Lenina, 8", "6", "+7 800 355 35 35", "3",  "2022-12-31", "the fastest, please", color);
+        orderNoColor = new OrderNoColor("alina", "Blinchik", "Lenina, 8", "6", "+7 800 355 35 35", "3", "2022-12-31", "the fastest, please", color);
     }
+
     @Test
     public void orderCreation() { // этом тесте создаем заказ без указания цвета , проверяем, что в ответе есть track
         int created = given().log().all()
@@ -24,4 +29,5 @@ public class CreateOrderTest {
                 .extract()
                 .path("track");
         assert created != 0;
-    }}
+    }
+}

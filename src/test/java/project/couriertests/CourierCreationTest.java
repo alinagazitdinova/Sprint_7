@@ -1,4 +1,5 @@
 package project.couriertests;
+
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -25,7 +26,7 @@ public class CourierCreationTest {
 
     @Test
     public void courierCreatedSuccesfully() { //Этот тест проверяет, что при создании курьера статус код 201, в ответе есть ok: true
-        var courier =  generator.random();
+        var courier = generator.random();
         ValidatableResponse creationResponse = client.create(courier);
         messageInBody = check.createdSuccessfully(creationResponse);
         assert !messageInBody.contains("ok: true");
@@ -36,9 +37,10 @@ public class CourierCreationTest {
         var courier = generator.generic();
         courier.setPassword(null);
         ValidatableResponse loginResponse = client.create(courier);
-       String message = check.creationFailed(loginResponse);
-       assert !message.isBlank();
+        String message = check.creationFailed(loginResponse);
+        assert !message.isBlank();
     }
+
     @Test
     public void creationFailsWithoutLogin() { //"Этот тест проверяет, что нельзя создать курьера, не указав логин
         var courier = generator.generic();
@@ -55,8 +57,12 @@ public class CourierCreationTest {
         String message = check.creationFailedTheSameLogin(loginResponse);
         assert message.contains("Этот логин уже используется. Попробуйте другой.");
     }
-    @After public void deleteCourier(){ //Удаляем курьера
-        if (courierId > 0){
-        ValidatableResponse response = client.delete(courierId);
-        check.deletedSuccesfully(response);
-    }}}
+
+    @After
+    public void deleteCourier() { //Удаляем курьера
+        if (courierId > 0) {
+            ValidatableResponse response = client.delete(courierId);
+            check.deletedSuccesfully(response);
+        }
+    }
+}
