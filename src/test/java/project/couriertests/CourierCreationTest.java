@@ -6,10 +6,10 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import project.helpers.CoourierAssertions;
-import project.helpers.Courier;
-import project.helpers.CourierClient;
-import project.helpers.CourierGenerator;
+import util.CoourierAssertions;
+import model.Courier;
+import client.CourierClient;
+import util.CourierGenerator;
 
 
 

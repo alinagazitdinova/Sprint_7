@@ -1,7 +1,9 @@
-package project.helpers;
+package client;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
+import model.Courier;
+import model.Credentials;
 
 import static io.restassured.RestAssured.given;
 

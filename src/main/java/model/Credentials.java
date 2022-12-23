@@ -1,4 +1,4 @@
-package project.helpers;
+package model;
 
 public class Credentials {
     private String login;

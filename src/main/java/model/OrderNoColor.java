@@ -1,8 +1,6 @@
-package project.helpers;
+package model;
 
-import java.util.List;
-
-public class Order {
+public class OrderNoColor {
     private String firstName;
     private String lastName;
     private String address;
@@ -11,9 +9,9 @@ public class Order {
     private String rentTime;
     private String deliveryDate;
     private String comment;
+    private String color;
 
-
-    public Order(String firstName, String lastName, String address, String metroStation, String phone, String rentTime, String deliveryDate, String comment, List<String> colors) {
+    public OrderNoColor(String firstName, String lastName, String address, String metroStation, String phone, String rentTime, String deliveryDate, String comment, String color) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -22,10 +20,11 @@ public class Order {
         this.rentTime = rentTime;
         this.deliveryDate = deliveryDate;
         this.comment = comment;
+        this.color = color;
     }
 
     // конструктор без параметров
-    public Order() {
+    public OrderNoColor() {
     }
 
     public String getFirstName() {
@@ -90,5 +89,13 @@ public class Order {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

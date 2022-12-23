@@ -1,13 +1,17 @@
 package project.couriertests;
 
+import client.CourierClient;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import model.Courier;
+import model.Credentials;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import project.helpers.*;
+import util.CoourierAssertions;
+import util.CourierGenerator;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;

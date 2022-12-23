@@ -1,5 +1,6 @@
-package project.helpers;
+package util;
 
+import model.Courier;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class CourierGenerator {

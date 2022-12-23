@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import project.helpers.Order;
+import model.Order;
 
 import java.util.Arrays;
 import java.util.List;
