@@ -1,23 +1,24 @@
 package project.ordertests;
 
+import client.OrderClient;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
+import model.Order;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import model.Order;
+import util.OrderAssertions;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.notNullValue;
-
 @RunWith(Parameterized.class)
 public class CreateOrderParametrizedTest {
     private final List<String> colors;
+    private final OrderClient client = new OrderClient();
+    private final OrderAssertions check = new OrderAssertions();
     public Order order;
 
     public CreateOrderParametrizedTest(List<String> color) {
@@ -42,15 +43,8 @@ public class CreateOrderParametrizedTest {
     @Test
     @DisplayName("Check creating orders with different variations of colors")
     public void orderCreationWithColors() { // этом тесте создаем заказ c казанием двух цветов сразу, также цветов по отдельности, проверяем, что в ответе есть track
-        Response response = given().log().all()
-                .header("Content-Type", "application/json")
-                .body(order)
-                .when()
-                .post("/api/v1/orders");
-        response.then().assertThat().body("track", notNullValue())
-                .statusCode(201)
-                .extract()
-                .path("track");
+        ValidatableResponse creationResponse = client.getOrderResponseWithColor(order).then();
+        check.orderCreatedSuccessfully(creationResponse);
     }
 
 }

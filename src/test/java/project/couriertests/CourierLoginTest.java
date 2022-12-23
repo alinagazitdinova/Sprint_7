@@ -3,26 +3,20 @@ package project.couriertests;
 import client.CourierClient;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
-import model.Courier;
-import model.Credentials;
+import model.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import util.CoourierAssertions;
 import util.CourierGenerator;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-
 public class CourierLoginTest {
     protected final CourierGenerator generator = new CourierGenerator();
     private final String ROOT = "/api/v1/courier";
     private final CourierClient client = new CourierClient();
     private final CoourierAssertions check = new CoourierAssertions();
-    private final String noLoginCreds = "{\"login\": \"\", \"password\": \"12347\" }";
-    private final String noPasswordCreds = "{\"login\": \"blabla\", \"password\": \"\" }";
+
     private Courier courier;
     private int courierId;
 
@@ -46,44 +40,27 @@ public class CourierLoginTest {
     @Test
     @DisplayName("Check the status code when logging in the non-existing courier")
     public void fakeCredsLoggInFailed() { //в этом тесте мы проверяем, что нельзя залогинить несуществующего курьера
-        String fakeCreds = "{\"login\": \"unknown\", \"password\": \"12347\" }";
-        Response response = given().log().all()
-                .header("Content-Type", "application/json")
-                .body(fakeCreds)
-                .when()
-                .post(ROOT + "/login");
-        response.then().assertThat().body("message", is("Учетная запись не найдена"))
-                .statusCode(404)
-                .extract().path("message");
+        FakeCreds fakeCreds = new FakeCreds();
+        ValidatableResponse failResponse = client.loginFakeCreds(fakeCreds);
+        check.loggedInFailed(failResponse);
 
     }
 
     @Test
     @DisplayName("Check the status code when logging in a courier without login indication in body")
     public void loginFailsWithoutLogin() { //этот тест проверяет, без login нельзя залогиниться возвращается текст ошибки
-        Response response = given().log().all()
-                .header("Content-Type", "application/json")
-                .body(noLoginCreds)
-                .when()
-                .post(ROOT + "/login");
-        response.then().assertThat().body("message", is("Недостаточно данных для входа"))
-                .statusCode(400)
-                .extract().path("message");
-            }
+        NoLoginCreds noLoginCreds = new NoLoginCreds();
+        ValidatableResponse noLoginResponse = client.loginNoLogin(noLoginCreds);
+        check.logginFailedWithourLogin(noLoginResponse);
+    }
 
     @Test
     @DisplayName("Check the status code when logging in a courier without password indication in body")
     public void loginFailsWithoutPassword() { //этот тест проверяет, без password нельзя залогиниться возвращается текст ошибки
-        Response response = given().log().all()
-                .header("Content-Type", "application/json")
-                .body(noPasswordCreds)
-                .when()
-                .post(ROOT + "/login");
-        response.then().assertThat().body("message", is("Недостаточно данных для входа"))
-                .statusCode(400)
-                .body("message", is("Недостаточно данных для входа"))
-                .extract().path("message");
-           }
+        NoPasswordCreds noPasswordCreds = new NoPasswordCreds();
+        ValidatableResponse noPasswordResponse = client.loginNoPassword(noPasswordCreds);
+        check.logginFailedWithourLogin(noPasswordResponse);
+    }
 
     @After
     public void deleteCourier() { //Удаляем курьера

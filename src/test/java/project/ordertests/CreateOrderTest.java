@@ -1,16 +1,17 @@
 package project.ordertests;
 
+import client.OrderClient;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
+import model.OrderNoColor;
 import org.junit.Before;
 import org.junit.Test;
-import model.OrderNoColor;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.notNullValue;
+import util.OrderAssertions;
 
 public class CreateOrderTest {
+    private final OrderClient client = new OrderClient();
+    private final OrderAssertions check = new OrderAssertions();
     public OrderNoColor orderNoColor;
     public String color = null;
 
@@ -23,16 +24,9 @@ public class CreateOrderTest {
     @Test
     @DisplayName("Check creation of order without color")
     public void orderCreation() { // этом тесте создаем заказ без указания цвета , проверяем, что в ответе есть track
-        Response response =
-        given().log().all()
-                .header("Content-Type", "application/json")
-                .body(orderNoColor)
-                .when()
-                .post("/api/v1/orders");
-        response.then().assertThat().body("track", notNullValue())
-                .statusCode(201)
-                .extract()
-                .path("track");
-       ;
+        ValidatableResponse creationResponse = client.getOrderResponse(orderNoColor).then();
+        check.orderCreatedSuccessfully(creationResponse);
     }
+
+
 }

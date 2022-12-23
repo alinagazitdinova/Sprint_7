@@ -13,6 +13,7 @@ public class CoourierAssertions {
                 .statusCode(201)
                 .body("ok", is(true)).toString();
     }
+
     @Step("Авторизация курьера курьера, проверка кода ответа")
     public int loggedInSuccessfully(ValidatableResponse response) {
         return response.assertThat()
@@ -20,10 +21,7 @@ public class CoourierAssertions {
                 .body("id", greaterThan(0))
                 .extract().path("id");
     }
-    @Step("Авторизация курьера курьера, проверка кода ответа при неуспешной автризации")
-    public void loggedInFailed(ValidatableResponse response) {
-        response.assertThat().statusCode(409);
-    }
+
     @Step("Создание курьера при недостаточных данных")
     public String creationFailed(ValidatableResponse response) {
         return response.assertThat()
@@ -31,6 +29,7 @@ public class CoourierAssertions {
                 .body("message", is("Недостаточно данных для создания учетной записи"))
                 .extract().path("message");
     }
+
     @Step("Создание курьера с одинаковым логином")
     public String creationFailedTheSameLogin(ValidatableResponse response) {
         return response.assertThat()
@@ -38,10 +37,26 @@ public class CoourierAssertions {
                 .body("message", is("Этот логин уже используется. Попробуйте другой."))
                 .extract().path("message");
     }
+
     @Step("Удаление курьера")
     public void deletedSuccesfully(ValidatableResponse response) {
         response.assertThat()
                 .statusCode(200)
                 .body("ok", is(true));
+    }
+
+    @Step("Создание курьера при недостаточных данных")
+    public void loggedInFailed(ValidatableResponse response) {
+        response.assertThat()
+                .statusCode(404)
+                .body("message", is("Учетная запись не найдена"));
+    }
+
+    @Step("Создание курьера при недостаточных данных")
+    public void logginFailedWithourLogin(ValidatableResponse response) {
+        response.assertThat()
+                .statusCode(400)
+                .body("message", is("Недостаточно данных для входа"))
+        ;
     }
 }

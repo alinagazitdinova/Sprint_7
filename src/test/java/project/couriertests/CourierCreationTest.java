@@ -1,21 +1,19 @@
 package project.couriertests;
 
+import client.CourierClient;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
+import model.Courier;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import util.CoourierAssertions;
-import model.Courier;
-import client.CourierClient;
 import util.CourierGenerator;
-
 
 
 public class CourierCreationTest {
     protected final CourierGenerator generator = new CourierGenerator();
-    private final String ROOT = "/api/v1/courier";
     private final CourierClient client = new CourierClient();
     private final CoourierAssertions check = new CoourierAssertions();
     private Courier courier;
@@ -44,7 +42,7 @@ public class CourierCreationTest {
         var courier = generator.generic();
         courier.setPassword(null);
         ValidatableResponse loginResponse = client.create(courier);
-        String message = check.creationFailed(loginResponse);
+        String response = check.creationFailed(loginResponse);
     }
 
     @Test
@@ -54,7 +52,6 @@ public class CourierCreationTest {
         courier.setLogin(null);
         ValidatableResponse loginResponse = client.create(courier);
         String message = check.creationFailed(loginResponse);
-        ;
     }
 
     @Test
