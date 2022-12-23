@@ -1,18 +1,19 @@
 package project.ordertests;
 
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import project.helpers.Order;
-import io.qameta.allure.junit4.DisplayName;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.notNullValue;
 
 @RunWith(Parameterized.class)
 public class CreateOrderParametrizedTest {
@@ -41,15 +42,15 @@ public class CreateOrderParametrizedTest {
     @Test
     @DisplayName("Check creating orders with different variations of colors")
     public void orderCreationWithColors() { // этом тесте создаем заказ c казанием двух цветов сразу, также цветов по отдельности, проверяем, что в ответе есть track
-        int created = given().log().all()
+        Response response = given().log().all()
                 .header("Content-Type", "application/json")
                 .body(order)
                 .when()
-                .post("/api/v1/orders")
-                .then().log().all()
+                .post("/api/v1/orders");
+        response.then().assertThat().body("track", notNullValue())
                 .statusCode(201)
                 .extract()
                 .path("track");
-        assert created != 0;
     }
+
 }

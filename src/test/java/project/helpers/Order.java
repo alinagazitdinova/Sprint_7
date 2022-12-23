@@ -12,6 +12,7 @@ public class Order {
     private String deliveryDate;
     private String comment;
 
+
     public Order(String firstName, String lastName, String address, String metroStation, String phone, String rentTime, String deliveryDate, String comment, List<String> colors) {
         this.firstName = firstName;
         this.lastName = lastName;
