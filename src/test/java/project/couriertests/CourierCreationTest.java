@@ -1,5 +1,6 @@
 package project.couriertests;
 
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -9,6 +10,7 @@ import project.helpers.CoourierAssertions;
 import project.helpers.Courier;
 import project.helpers.CourierClient;
 import project.helpers.CourierGenerator;
+
 
 public class CourierCreationTest {
     protected final CourierGenerator generator = new CourierGenerator();
@@ -25,6 +27,8 @@ public class CourierCreationTest {
     }
 
     @Test
+    @DisplayName("Check the status code when creating a courier, ok: true in the response body")
+
     public void courierCreatedSuccesfully() { //Этот тест проверяет, что при создании курьера статус код 201, в ответе есть ok: true
         var courier = generator.random();
         ValidatableResponse creationResponse = client.create(courier);
@@ -33,6 +37,8 @@ public class CourierCreationTest {
     }
 
     @Test
+    @DisplayName("Check the status code when creating a courier without password indication in body")
+
     public void creationFailsWithoutPassword() { //"Этот тест проверяет, что нельзя создать курьера, не указав пароль
         var courier = generator.generic();
         courier.setPassword(null);
@@ -42,6 +48,7 @@ public class CourierCreationTest {
     }
 
     @Test
+    @DisplayName("Check the status code when creating a courier without login indication in body")
     public void creationFailsWithoutLogin() { //"Этот тест проверяет, что нельзя создать курьера, не указав логин
         var courier = generator.generic();
         courier.setLogin(null);
@@ -51,6 +58,7 @@ public class CourierCreationTest {
     }
 
     @Test
+    @DisplayName("Check the status code when creating a courier with the same login")
     public void creationFailsWithTheSameLogin() { //"Этот тест проверяет, что нельзя создать 2х курьеров с одинаковым логином
         var courier = generator.generic();
         ValidatableResponse loginResponse = client.create(courier);

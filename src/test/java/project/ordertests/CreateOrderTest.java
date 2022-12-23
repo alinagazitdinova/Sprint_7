@@ -3,6 +3,7 @@ package project.ordertests;
 import io.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
+import io.qameta.allure.junit4.DisplayName;
 import project.helpers.OrderNoColor;
 
 import static io.restassured.RestAssured.given;
@@ -18,6 +19,7 @@ public class CreateOrderTest {
     }
 
     @Test
+    @DisplayName("Check creation of order without color")
     public void orderCreation() { // этом тесте создаем заказ без указания цвета , проверяем, что в ответе есть track
         int created = given().log().all()
                 .header("Content-Type", "application/json")

@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Before;
 import org.junit.Test;
+import io.qameta.allure.junit4.DisplayName;
 
 import static io.restassured.RestAssured.given;
 
@@ -16,6 +17,7 @@ public class OrdersNumberTest {
     }
 
     @Test
+    @DisplayName("Check the status code when getting all orders")
     public void getOrderNumberByTrack() { //этот тест для получения всех заказов, проверяем, что статус 200
         ValidatableResponse numberOrders = given()
                 .get(ROOT)

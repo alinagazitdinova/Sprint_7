@@ -3,9 +3,11 @@ package project.ordertests;
 import io.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import project.helpers.Order;
+import io.qameta.allure.junit4.DisplayName;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +39,7 @@ public class CreateOrderParametrizedTest {
     }
 
     @Test
+    @DisplayName("Check creating orders with different variations of colors")
     public void orderCreationWithColors() { // этом тесте создаем заказ c казанием двух цветов сразу, также цветов по отдельности, проверяем, что в ответе есть track
         int created = given().log().all()
                 .header("Content-Type", "application/json")

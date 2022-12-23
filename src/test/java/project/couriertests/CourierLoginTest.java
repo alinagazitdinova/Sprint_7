@@ -5,6 +5,7 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import io.qameta.allure.junit4.DisplayName;
 import project.helpers.*;
 
 import static io.restassured.RestAssured.given;
@@ -26,6 +27,7 @@ public class CourierLoginTest {
     }
 
     @Test
+    @DisplayName("Check the status code when logging in a courier with creds, the id in response body")
     public void loggedInReturnId() { //в этом тесте мы создаем и залогиниваем курьера этими данными, проверяем, что вернулось id
         var courier = generator.random();
         ValidatableResponse creationResponse = client.create(courier);
@@ -37,6 +39,7 @@ public class CourierLoginTest {
     }
 
     @Test
+    @DisplayName("Check the status code when loggin in the non-existing courier")
     public void fakeCredsLoggInFailed() { //в этом тесте мы проверяем, что нельзя залогинить несуществующего курьера
         String fakeCreds = "{\"login\": \"unknown\", \"password\": \"12347\" }";
         String message = given().log().all()
@@ -52,6 +55,7 @@ public class CourierLoginTest {
     }
 
     @Test
+    @DisplayName("Check the status code when logging in a courier without login indication in body")
     public void loginFailsWithoutLogin() { //этот тест проверяет, без login нельзя залогиниться возвращается текст ошибки
         String message = given().log().all()
                 .header("Content-Type", "application/json")
@@ -66,6 +70,7 @@ public class CourierLoginTest {
     }
 
     @Test
+    @DisplayName("Check the status code when logging in a courier without password indication in body")
     public void loginFailsWithoutPassword() { //этот тест проверяет, без password нельзя залогиниться возвращается текст ошибки
         String message = given().log().all()
                 .header("Content-Type", "application/json")
